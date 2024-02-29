@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style/style.css" />
+    <script src="script/index.js" async defer type="module"></script>
+    <title>Book Enjoyer</title>
+
+    <link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="img/favicon/site.webmanifest" />
+  </head>
+
+  <body class="min-h-screen flex flex-col ">
+    <nav class="container mx-auto navbar bg-base-101 flex flex-row justify-between">
+      <a class="btn btn-ghost text-xl">Book Enjoyer</a>
+      <div class="flex justify-center items-center">
+        <button id="create-book-button" class="btn">Add book</button>
+        <div class="dropdown">
+          <div tabindex="0" role="button" class="btn m-1">
+            Theme
+            <svg width="12px" height="12px" class="h-2 w-2 fill-current opacity-60 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg>
+          </div>
+          <ul tabindex="0" class="dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-52">
+            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" value="default"/></li>
+            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" value="light"/></li>
+            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" value="dark"/></li>
+            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" value="retro"/></li>
+            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" value="cyberpunk"/></li>
+            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" value="valentine"/></li>
+            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" value="aqua"/></li>
+            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" value="cupcake"/></li>
+            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" value="dracula"/></li>
+            <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" value="nord"/></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- #region Create Modal-->
+    <dialog id="create-modal" class="modal">
+      <div class="modal-box">
+        <form method="dialog">
+          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+        <h3 class="font-bold text-lg">Enjoyed a book?</h3>
+        <form class="py-4 flex flex-col gap-4" id="create-modal-form">
+          <label class="input input-bordered flex items-center gap-2">Title<input id="book-title" type="text" class="grow" required/></label>
+          <label class="input input-bordered flex items-center gap-2">Author<input id="book-author" type="text" class="grow" required/></label>
+          <label class="label cursor-pointer px-4"><span class="label-text">Owned?</span><input id="book-owned" type="checkbox" checked="checked" class="checkbox"/></label>
+          <div class="flex flex-row justify-end"><button class="btn">Enjoyed!</button></div>
+        </form>
+      </div>
+    </dialog>
+    <!-- #endregion Create Modal-->
+
+    <!-- #region Edit Modal -->
+    <dialog id="edit-modal" class="modal">
+      <div class="modal-box">
+        <form method="dialog">
+          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+        <h3 class="font-bold text-lg">Edit enjoyed book?</h3>
+        <form class="py-4 flex flex-col gap-4" id="edit-modal-form">
+          <label class="input input-bordered flex items-center gap-2">
+            Title
+            <input id="book-title" type="text" class="grow" required/>
+          </label>
+          <label class="input input-bordered flex items-center gap-2">
+            Author
+            <input id="book-author" type="text" class="grow" required/>
+          </label>
+          <label class="label cursor-pointer px-4">
+            <span class="label-text">Owned?</span> 
+            <input id="book-owned" type="checkbox" checked="checked" class="checkbox"/>
+          </label>
+          <div class="flex flex-row justify-end">
+            <button id="edit-button" class="btn">Update</button>
+          </div>
+        </form>
+      </div>
+    </dialog>
+    <!-- #endregion Edit Modal -->
+    
+    <main id="book-grid" class="container mx-auto flex-1 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 justify-center content-start justify-items-center items-center">
+      <div class="card w-96 bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Book title</h2>
+          <p>Book Author</p>
+          <div class="form-control">
+            <label class="label cursor-pointer p-0">
+              <span class="label-text">Own?</span> 
+              <input type="checkbox" class="checkbox" checked disabled/>
+            </label>
+          </div>
+          <div class="card-actions justify-end pt-2">
+            <button class="btn btn-sm btn-circle">📝</button>
+            <button class="btn btn-sm btn-circle">❌</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="container mx-auto footer footer-center p-4 text-base-content ">
+      <aside>
+        <p>Copyright &copy; 2024 - All right reserved by Book Enjoyer Ltd</p>
+      </aside>
+    </footer>
+  </body>
+</html>

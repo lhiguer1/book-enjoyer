@@ -1,0 +1,21 @@
+{
+  "name": "book-enjoyer",
+  "version": "1.0.0",
+  "description": "**Client:** HTML, TailwindCSS, TypeScript",
+  "scripts": {
+    "dev:tailwindcss": "tailwindcss -i ./src/style/style.css -o ./dist/style/style.css --watch",
+    "dev:typescript": "tsc --watch",
+    "build": "tailwindcss -i ./src/style/style.css -o ./dist/style/style.css && tsc",
+    "test": "jest"
+  },
+  "author": "Leonel Higuera",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.16",
+    "daisyui": "^4.6.2",
+    "jest": "^29.7.0",
+    "tailwindcss": "^3.4.1",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.3.3"
+  }
+}

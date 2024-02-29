@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Uncommented during development */
+/* * {
+  border: red 0.5px dotted;
+} */
