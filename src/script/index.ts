@@ -40,24 +40,85 @@ function createCard(book: Book): HTMLElement {
     '';
 
   const div = document.createElement("div");
-  div.innerHTML = cardHTML;
+  div.className = "card w-96 bg-base-100 shadow-xl";
+  div.dataset["id"] = book.id;
 
-  (div.querySelector("#delete-button") as HTMLFormElement).addEventListener(
-    "click",
-    () => {
-      library.deleteBook(book.id);
-      updateBookGrid();
-    }
+  div.append(
+    ((): HTMLElement => {
+      const childElement = document.createElement("div");
+      div.className = "card-body";
+      childElement.append(
+        ((): HTMLElement => {
+          const childElement = document.createElement("h2");
+          childElement.className = "card-title";
+          childElement.textContent = book.title;
+          return childElement;
+        })(),
+        ((): HTMLElement => {
+          const childElement = document.createElement("p");
+          childElement.textContent = book.author;
+          return childElement;
+        })(),
+        ((): HTMLElement => {
+          const childElement = document.createElement("div");
+          childElement.className = "form-control";
+          childElement.append(
+            ((): HTMLElement => {
+              const childElement = document.createElement("label");
+              childElement.className = "label cursor-pointer p-0";
+              childElement.append(
+                ((): HTMLElement => {
+                  const childElement = document.createElement("span");
+                  childElement.className = "label-text";
+                  childElement.textContent = "Owned?";
+                  return childElement;
+                })(),
+                ((): HTMLElement => {
+                  const childElement = document.createElement("input");
+                  childElement.className = "checkbox";
+                  childElement.type = "checkbox";
+                  childElement.disabled = true;
+                  childElement.checked = book.owned;
+                  return childElement;
+                })()
+              );
+              return childElement;
+            })()
+          );
+          return childElement;
+        })(),
+        ((): HTMLElement => {
+          const childElement = document.createElement("div");
+          childElement.className = "card-actions justify-end pt-2";
+          childElement.append(
+            ((): HTMLElement => {
+              const childElement = document.createElement("button");
+              childElement.className = "card-actions justify-end pt-2";
+              childElement.textContent = "📝";
+              childElement.addEventListener("click", () => {
+                editBook(book);
+              });
+
+              return childElement;
+            })(),
+            ((): HTMLElement => {
+              const childElement = document.createElement("button");
+              childElement.className = "card-actions justify-end pt-2";
+              childElement.textContent = "❌";
+              childElement.addEventListener("click", () => {
+                library.deleteBook(book.id);
+                updateBookGrid();
+              });
+              return childElement;
+            })()
+          );
+          return childElement;
+        })()
+      );
+      return childElement;
+    })()
   );
-
-  (div.querySelector("#edit-button") as HTMLFormElement).addEventListener(
-    "click",
-    () => {
-      editBook(book);
-    }
-  );
-
-  return div.firstElementChild as HTMLElement;
+  return div;
 }
 
 // prettier-ignore
