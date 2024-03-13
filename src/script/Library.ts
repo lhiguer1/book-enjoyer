@@ -13,7 +13,7 @@ class Library {
 
   createBook(title: string, author: string, owned: boolean): Book {
     const newBook: Book = {
-      id: crypto.randomUUID(),
+      id: (new Date().valueOf() + Math.random()).toString(36),
       title,
       author,
       owned,
