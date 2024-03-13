@@ -46,7 +46,7 @@ function createCard(book: Book): HTMLElement {
   div.append(
     ((): HTMLElement => {
       const childElement = document.createElement("div");
-      div.className = "card-body";
+      childElement.className = "card-body";
       childElement.append(
         ((): HTMLElement => {
           const childElement = document.createElement("h2");
