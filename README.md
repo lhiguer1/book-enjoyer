@@ -21,6 +21,8 @@ To deploy this project run
 
 **Client:** HTML, TypeScript, TailwindCSS, daisyUI
 
+**DevOps:** AWS CodePipeLine triggered by pushes to GitHub main branch. Built with CodeBuild. Deployed to S3 bucket with CodeDeploy.
+
 ## Acknowledgements
 
 - [readme.so](https://github.com/octokatherine/readme.so) for README templating
